@@ -1,0 +1,2 @@
+# TradeManufacturingCompanyArchitecture
+trade and manufacturing company architecture
