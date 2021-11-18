@@ -118,10 +118,7 @@ workspace "Транснациональная компания по произв
            background #bd1112
            color #ffffff
        }
-        element "Не применять" {
-           background #bd1112
-           color #ffffff
-       }
+        
         element "Зеленый" {
            background #228B22
            color #ffffff
