@@ -1,0 +1,318 @@
+190  [main] INFO  d.s.c.ls.C4LanguageServerLauncher - Starting ProcessIO Connection
+190  [main] INFO  d.s.c.ls.C4LanguageServerLauncher - Launching C4LanguageServer started
+329  [main] INFO  d.s.c.ls.service.C4LanguageServer - getTextDocumentService
+332  [main] INFO  d.s.c.ls.service.C4LanguageServer - getWorkspaceService
+343  [main] INFO  d.s.c.ls.service.C4LanguageServer - connect
+381  [pool-1-thread-1] INFO  d.s.c.ls.service.C4LanguageServer - initialize
+425  [pool-1-thread-1] INFO  d.s.c.l.s.C4TextDocumentService - didOpen file:///f%3A/arch/DSL.dsl
+426  [pool-1-thread-1] INFO  d.s.c.l.s.C4TextDocumentService - documentColor
+426  [ForkJoinPool.commonPool-worker-19] INFO  d.s.c.l.s.C4TextDocumentService - --> getDiagnostics 0
+427  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - calcDiagnostics
+428  [ForkJoinPool.commonPool-worker-5] INFO  d.s.c.l.s.C4TextDocumentService - --> getDocument
+446  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - createModel f:\arch\DSL.dsl
+449  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - Parsing... workspace "Транснациональная компания по производству и продаже спортирных товаров и инвентаря" {
+!identifiers hierarchical
+
+
+    model {
+    
+    #Users
+        client = person "Клиент" "Клиенты, пользователи" "Синий"
+        distributor = person "Дистибьютор"
+        
+        
+    #System
+    enterprise "Big Sport plc" {
+        logistics = softwareSystem  "Логистика" "Обеспечивает доставку клиентам и дистибьютерам, Внешнее ПО" "Красный" {
+            logistic = container "Логистика" 
+            api = container "API"
+        }
+        clientApps = softwareSystem "Клиентские приложения" "Приложения для клиентов и дистибьюторов" "Голубой"{
+          
+            mobile = container "Мобильное приложение" "Мобильные приложения" "Android, IOS" "Мобил"
+            api = container "API"
+            catalog = container "Сайт-каталог продукции для покупателей"
+            clients = container " ЛК для клиента" 
+            distributors = container "ЛК для дистибьютора" 
+            orders = container "Заказы" 
+            
+            #Relationships
+            client -> api "Пользователь заходит в свой ЛК для заказа товара"
+            distributor -> api  "Дистибьютер заходит в свой ЛК для заказа товара"
+            api -> mobile
+            api -> catalog
+            catalog ->  clients
+            catalog ->  distributors
+            clients -> orders
+            distributors -> orders
+            mobile -> orders
+            
+            
+        }
+        
+        production = softwareSystem "Производство" "Управление производтсвенным циклом" "Зеленый" {
+            manufacturingControl = container "Управление производством" 
+            suppliers = container "Поставщики" 
+            materials = container "Склады материалов" 
+            qualityControl = container "Контроль качества" 
+            iot = container "IoT" 
+            
+            #Relationships
+            suppliers -> materials
+            materials -> manufacturingControl
+            iot -> manufacturingControl
+            manufacturingControl -> iot
+            manufacturingControl -> qualityControl
+            qualityControl -> manufacturingControl
+            
+        }
+        
+        warehouses = softwareSystem "Склад" "Готовая продукция"  "Серый"{
+            warehouse = container "Склад готовой продукции" 
+            api = container "API"
+            iot = container "IoT" 
+            
+            #Relationships
+            logistics -> api "Резервирование и сборка заказа"
+            production -> api  "Наполнение складов готовой продукцией"
+            api -> warehouse 
+            iot -> warehouse
+            warehouse ->  iot
+            
+        }
+        
+        
+       }
+       
+        
+        
+
+
+    #Relationships
+        clientApps -> logistics "Заказ приходит в службу доставки"
+        
+    }
+    
+    #views
+
+    views {
+        systemlandscape "SystemLandScape" "Системный ландшафт" {
+           title "Системный ландшафт. Транснациональная компания по производству и продаже спортирных товаров и инвентаря"
+            include *
+        }
+    
+        container clientApps systemContextClientApps  {
+            include *
+           autolayout
+        }
+      
+        systemContext logistics  systemContextLogistics {
+            include *
+            autolayout
+        }
+         container warehouses  systemContextWarehouses {
+            include *
+            autolayout
+        }
+         container production  systemContextProduction {
+            include *
+            autolayout
+        }
+        theme default
+        
+        
+        #styles
+        
+    styles {
+       element "Мобил" {
+           shape MobileDevicePortrait
+           background #008b45
+           color #ffffff
+       }
+      
+       element "Голубой" {
+           background #4682B4
+           color #ffffff
+       }
+       element "Красный" {
+           background #bd1112
+           color #ffffff
+       }
+        
+        element "Зеленый" {
+           background #228B22
+           color #ffffff
+       }
+        element "Серый" {
+           background #708090
+           color #ffffff
+       }
+        element "Синий" {
+           background #0000CD
+           color #ffffff
+       }
+       relationship Relationship {
+                dashed false
+            }
+      }
+     }
+    
+}
+
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: client, modelId: 1 at linenumber: ., 8
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: distributor, modelId: 2 at linenumber: ., 9
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: logistics, modelId: 3 at linenumber: ., 14
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: logistic, modelId: 4 at linenumber: ., 15
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: api, modelId: 5 at linenumber: ., 16
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext SoftwareSystemDslContext at linenumber ., 17
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: clientApps, modelId: 6 at linenumber: ., 18
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: mobile, modelId: 7 at linenumber: ., 20
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: api, modelId: 8 at linenumber: ., 21
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: catalog, modelId: 9 at linenumber: ., 22
+467  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+482  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: clients, modelId: 10 at linenumber: ., 23
+482  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+482  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: distributors, modelId: 11 at linenumber: ., 24
+482  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+482  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: orders, modelId: 12 at linenumber: ., 25
+482  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+553  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 1->8, identifier: null, at linenumber: ., 28
+553  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+553  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 2->8, identifier: null, at linenumber: ., 29
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 8->7, identifier: null, at linenumber: ., 30
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 8->9, identifier: null, at linenumber: ., 31
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 9->10, identifier: null, at linenumber: ., 32
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 9->11, identifier: null, at linenumber: ., 33
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 10->12, identifier: null, at linenumber: ., 34
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 11->12, identifier: null, at linenumber: ., 35
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 7->12, identifier: null, at linenumber: ., 36
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext SoftwareSystemDslContext at linenumber ., 39
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: production, modelId: 24 at linenumber: ., 41
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: manufacturingControl, modelId: 25 at linenumber: ., 42
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: suppliers, modelId: 26 at linenumber: ., 43
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: materials, modelId: 27 at linenumber: ., 44
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: qualityControl, modelId: 28 at linenumber: ., 45
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: iot, modelId: 29 at linenumber: ., 46
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 26->27, identifier: null, at linenumber: ., 49
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 27->25, identifier: null, at linenumber: ., 50
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 29->25, identifier: null, at linenumber: ., 51
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 25->29, identifier: null, at linenumber: ., 52
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 25->28, identifier: null, at linenumber: ., 53
+568  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 28->25, identifier: null, at linenumber: ., 54
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext SoftwareSystemDslContext at linenumber ., 56
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: warehouses, modelId: 36 at linenumber: ., 58
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: warehouse, modelId: 37 at linenumber: ., 59
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: api, modelId: 38 at linenumber: ., 60
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedModelElement identifier: iot, modelId: 39 at linenumber: ., 61
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 3->38, identifier: null, at linenumber: ., 64
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 24->38, identifier: null, at linenumber: ., 65
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 38->37, identifier: null, at linenumber: ., 66
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 39->37, identifier: null, at linenumber: ., 67
+584  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 37->39, identifier: null, at linenumber: ., 68
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext SoftwareSystemDslContext at linenumber ., 70
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext EnterpriseDslContext at linenumber ., 73
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedRelationShip 6->3, identifier: null, at linenumber: ., 80
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ModelDslContext at linenumber ., 82
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedView View: SystemLandScape at linenumber ., 87
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext SystemLandscapeViewDslContext at linenumber ., 90
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedView View: systemContextClientApps at linenumber ., 92
+590  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ContainerViewDslContext at linenumber ., 95
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedView View: systemContextLogistics at linenumber ., 97
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext SystemContextViewDslContext at linenumber ., 100
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedView View: systemContextWarehouses at linenumber ., 101
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ContainerViewDslContext at linenumber ., 104
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedView View: systemContextProduction at linenumber ., 105
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ContainerViewDslContext at linenumber ., 108
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 117
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 118
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ElementStyleDslContext at linenumber ., 119
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 122
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+606  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 123
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ElementStyleDslContext at linenumber ., 124
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 126
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 127
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ElementStyleDslContext at linenumber ., 128
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 131
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 132
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ElementStyleDslContext at linenumber ., 133
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 135
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 136
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ElementStyleDslContext at linenumber ., 137
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 139
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onParsedColor at linenumber ., 140
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: ., currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ElementStyleDslContext at linenumber ., 141
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext RelationshipStyleDslContext at linenumber ., 144
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext StylesDslContext at linenumber ., 145
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext ViewsDslContext at linenumber ., 146
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - onEndContext WorkspaceDslContext at linenumber ., 148
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - Parsing finished
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c4dsl.ls.model.C4DocumentModel - setWorkspace Транснациональная компания по производству и продаже спортирных товаров и инвентаря
+622  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c4dsl.ls.model.C4DocumentModel - setValid true
+622  [ForkJoinPool.commonPool-worker-19] INFO  d.s.c.l.s.C4TextDocumentService - <-- getDiagnostics
+622  [ForkJoinPool.commonPool-worker-5] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: DSL.dsl, currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+622  [ForkJoinPool.commonPool-worker-5] INFO  d.s.c.l.s.C4TextDocumentService - <-- getDocument
+622  [ForkJoinPool.commonPool-worker-5] DEBUG d.s.c.ls.provider.C4ColorProvider - calcDocumentColors file:/f:/arch/DSL.dsl
+622  [ForkJoinPool.commonPool-worker-5] DEBUG d.s.c.ls.provider.C4ColorProvider -                    [117, 118, 122, 123, 126, 127, 131, 132, 135, 136, 139, 140]
+675  [pool-1-thread-1] INFO  d.s.c.l.s.C4TextDocumentService - codeLens
+676  [ForkJoinPool.commonPool-worker-5] INFO  d.s.c.l.s.C4TextDocumentService - --> getDocument
+676  [ForkJoinPool.commonPool-worker-5] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: DSL.dsl, currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+677  [ForkJoinPool.commonPool-worker-5] INFO  d.s.c.l.s.C4TextDocumentService - <-- getDocument
+730  [pool-1-thread-1] INFO  d.s.c.l.s.C4TextDocumentService - semanticTokensFull
+730  [ForkJoinPool.commonPool-worker-19] INFO  d.s.c.l.s.C4TextDocumentService - --> getDocument
+730  [ForkJoinPool.commonPool-worker-19] DEBUG d.s.c.ls.model.C4DocumentManager - getModel _file: DSL.dsl, currentFile: f:\arch\DSL.dsl -> f:\arch\DSL.dsl
+730  [ForkJoinPool.commonPool-worker-19] INFO  d.s.c.l.s.C4TextDocumentService - <-- getDocument
