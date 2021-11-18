@@ -16,8 +16,7 @@ workspace "Транснациональная компания по произв
             api = container "API"
         }
         clientApps = softwareSystem "Клиентские приложения" "Приложения для клиентов и дистибьюторов" "Голубой"{
-            #user = container "Покупатель" "Физическое или юридическое лицо, ИП" "" "Пользователь"
-            #dist = container "Дистибьютор" "Юридическое лицо, ИП" "" "Пользователь"
+          
             mobile = container "Мобильное приложение" "Мобильные приложения" "Android, IOS" "Мобил"
             api = container "API"
             catalog = container "Сайт-каталог продукции для покупателей"
@@ -76,11 +75,8 @@ workspace "Транснациональная компания по произв
 
 
     #Relationships
-        #client -> clientApps "Пользователь заходит в свой ЛК для заказа товара"
-        #distributor -> clientApps "Дистибьютер заходит в свой ЛК для заказа товара"
         clientApps -> logistics "Заказ приходит в службу доставки"
-        #logistics -> warehouses "Резервирование и сборка заказа"
-        #production -> warehouses  "Наполнение складов готовой продукцией"
+        
     }
 
     views {
@@ -113,11 +109,7 @@ workspace "Транснациональная компания по произв
            background #008b45
            color #ffffff
        }
-       element "Пользователь" {
-           shape Person
-           background #0000ff
-           color #ffffff
-       }
+      
        element "Голубой" {
            background #4682B4
            color #ffffff
