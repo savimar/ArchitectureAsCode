@@ -51,6 +51,7 @@ workspace "Транснациональная компания по произв
             iot -> manufacturingControl
             manufacturingControl -> iot
             manufacturingControl -> qualityControl
+            qualityControl -> manufacturingControl
             
         }
         
@@ -79,6 +80,8 @@ workspace "Транснациональная компания по произв
         clientApps -> logistics "Заказ приходит в службу доставки"
         
     }
+    
+    #views
 
     views {
         systemlandscape "SystemLandScape" "Системный ландшафт" {
@@ -104,6 +107,10 @@ workspace "Транснациональная компания по произв
             autolayout
         }
         theme default
+        
+        
+        #styles
+        
     styles {
        element "Мобил" {
            shape MobileDevicePortrait
