@@ -1,4 +1,4 @@
 # TradeManufacturingCompanyArchitecture
 trade and manufacturing company architecture
 
-![Общая схема контекста] (scrin/structurizr-SystemLandScape(3).png "Общая схема")
+![Общая схема контекста] (https://github.com/savimar/TradeManufacturingCompanyArchitecture/blob/main/scrin/structurizr-SystemLandScape%20(3).png "Общая схема")
