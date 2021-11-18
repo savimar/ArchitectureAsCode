@@ -16,3 +16,11 @@ trade and manufacturing company architecture
 **Диаграмма контейнеров микросервиса клиентских приложений** 
 
 <img src="https://github.com/savimar/TradeManufacturingCompanyArchitecture/raw/master/screen/structurizr-systemContextClientApps.png" width="700" />
+
+**Диаграмма контейнеров микросервиса управления производством** 
+
+<img src="https://github.com/savimar/TradeManufacturingCompanyArchitecture/raw/master/screen/structurizr-systemContextProduction.png" width="700" />
+
+**Диаграмма контейнеров микросервиса управления складами готовой продукции** 
+
+<img src="https://github.com/savimar/TradeManufacturingCompanyArchitecture/raw/master/screen/structurizr-systemContextWarehouses.png" width="700" />
