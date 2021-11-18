@@ -1,5 +1,7 @@
 # TradeManufacturingCompanyArchitecture
 trade and manufacturing company architecture  
+
+
 **Общая схема контекста**
 
 
