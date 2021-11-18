@@ -26,10 +26,11 @@ workspace "Транснациональная компания по произв
             
             #Relationships
             client -> api "Пользователь заходит в свой ЛК для заказа товара"
-            distributor -> distributors "Дистибьютер заходит в свой ЛК для заказа товара"
+            distributor -> api  "Дистибьютер заходит в свой ЛК для заказа товара"
             api -> mobile
             api -> catalog
-            api -> clients
+            catalog ->  clients
+            catalog ->  distributors
             clients -> orders
             distributors -> orders
             mobile -> orders
