@@ -15,4 +15,4 @@ trade and manufacturing company architecture
 
 **Диаграмма контейнеров микросервиса клиентских приложений** 
 
-<img src="https://github.com/savimar/TradeManufacturingCompanyArchitecture/raw/master/screen/structurizr-systemContextClientApps.png" width="400" />
+<img src="https://github.com/savimar/TradeManufacturingCompanyArchitecture/raw/master/screen/structurizr-systemContextClientApps.png" width="700" />
