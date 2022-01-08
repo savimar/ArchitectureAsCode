@@ -5,7 +5,7 @@ trade and manufacturing company architecture
 **Общая схема системного контекста**
 
 
-<img src="https://github.com/savimar/ArchitectureAsCode/blob/main/screen/structurizr-SystemLandScape%20(4).png" width="700" />
+<img src="https://github.com/savimar/ArchitectureAsCode/blob/main/screen/structurizr-SystemLandScape%20(4).png" width="1000" />
 
 
 **Системный контекст микросервиса логистики** 
@@ -27,4 +27,4 @@ trade and manufacturing company architecture
 
 **Диаграмма контейнеров микросервисов социальной сети** 
 
-<img src="https://github.com/savimar/ArchitectureAsCode/blob/main/screen/structurizr-systemContextSocialNetwork.png" width="700" />
+<img src="https://github.com/savimar/ArchitectureAsCode/blob/main/screen/structurizr-systemContextSocialNetwork.png" width="1500" />
