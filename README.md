@@ -27,4 +27,4 @@ trade and manufacturing company architecture
 
 **Диаграмма контейнеров микросервисов социальной сети** 
 
-<img src="https://github.com/savimar/TradeManufacturingCompanyArchitecture/raw/master/screen/structurizr-systemContextSocialNetwork.png" width="700" />
+<img src="https://github.com/savimar/ArchitectureAsCode/blob/main/screen/structurizr-systemContextSocialNetwork.png" width="700" />
