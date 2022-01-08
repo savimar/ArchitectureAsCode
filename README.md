@@ -5,7 +5,7 @@ trade and manufacturing company architecture
 **Общая схема системного контекста**
 
 
-<img src="https://github.com/savimar/TradeManufacturingCompanyArchitecture/raw/master/screen/structurizr-SystemLandScape (4).png" width="700" />
+<img src="https://github.com/savimar/ArchitectureAsCode/blob/main/screen/structurizr-SystemLandScape%20(4).png" width="700" />
 
 
 **Системный контекст микросервиса логистики** 
