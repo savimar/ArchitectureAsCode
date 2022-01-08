@@ -69,6 +69,44 @@ workspace "Транснациональная компания по произв
             
         }
         
+        socialNetwork = softwareSystem "Социальная сеть"{
+              groupsInterest = container "Группы по интересам"
+              workout = container "Тренировка, характеристики, расписание"
+              location = container "Местоположение"
+              groupsJointActivities = container "Группы для совместных занятий"
+              search = container "Микросервис поиска"
+              sportsEquipment = container "Спортивный инвентарь"
+              notification  = container "Микросервис уведомлений"
+              promotions = container "Промоакции и новости"
+              externalSensors = container "Микросервис внешних датчиков"
+              competitions = container "Соревнования"
+               mobile = container "Мобильное приложение" "Мобильные приложения" "Android, IOS" "Мобил"
+            
+             #Relationships
+                client ->  groupsInterest   "Пользователь выбирает группу по интересам"
+                client ->  workout "Тренировки пользователя"
+                client -> sportsEquipment "Спортивный инвентарь пользователя"
+                clientApps -> promotions "Промоакции, новости, уведомления
+                client -> location
+                search -> location 
+                search -> client 
+                search -> groupsJointActivities 
+                search -> groupsInterest 
+                client  ->   groupsJointActivities    "Пользователь выбирает группу для совместных занятий"
+                notification ->  client
+                promotions -> notification
+                sportsEquipment -> promotions
+                client -> externalSensors 
+                client ->  competitions   "Пользователь выбирает соревнования"
+                competitions -> promotions
+                externalSensors -> mobile
+                mobile ->  externalSensors 
+                
+                
+                
+                
+                
+            }
         
        }
        
@@ -89,7 +127,8 @@ workspace "Транснациональная компания по произв
             include *
         }
     
-        container clientApps systemContextClientApps  {
+        container clientApps systemContextClientApps {
+            title "Диаграмма контейнеров клиентских приложений"
             include *
            autolayout
         }
@@ -103,6 +142,10 @@ workspace "Транснациональная компания по произв
             autolayout
         }
          container production  systemContextProduction {
+            include *
+            autolayout
+        }
+         container socialNetwork  systemContextSocialNetwork {
             include *
             autolayout
         }
