@@ -69,18 +69,18 @@ workspace "Транснациональная компания по произв
             
         }
         
-        socialNetwork = softwareSystem "Социальная сеть"{
-              groupsInterest = container "Группы по интересам"
-              workout = container "Тренировка, характеристики, расписание"
+        socialNetwork = softwareSystem "Социальная сеть" {
+              groupsInterest = container "Группы по интересам" "1.	Реализация социальных компонентов в приложении. "
+              workout = container "Тренировка, характеристики, расписание" "2.	Предоставление информации о характеристиках тренировки. 5.	Формирование и подсказки по составлению тренировок и их расписания. 7.	Геймификация. "
               location = container "Местоположение"
               groupsJointActivities = container "Группы для совместных занятий"
-              search = container "Микросервис поиска"
-              sportsEquipment = container "Спортивный инвентарь"
-              notification  = container "Микросервис уведомлений"
-              promotions = container "Промоакции и новости"
-              externalSensors = container "Микросервис внешних датчиков"
+              search = container "Микросервис поиска" "3.	Возможность поиска людей по схожим интересам, поиск людей, которые тренируются в том же месте, имеют те же маршруты или которые тренируются прямо сейчас, для формирования групп для совместных занятий"
+              sportsEquipment = container "Спортивный инвентарь" "4.	Возможность указания своего спортивного инвентаря (обувь, снаряды) для подсказок по составлению тренировок или своевременного обновления обуви. "
+              notification  = container "Микросервис уведомлений" "6.	Уведомление друзей о ваших новых успехах."
+              promotions = container "Промоакции и новости" "8.	Внедрение промоакций и новостей спорта в зависимости от характера тренировок для вовлечённости."
+              externalSensors = container "Микросервис внешних датчиков" "9.	Возможность подключения сторонних устройств для отслеживания тренировок "
               competitions = container "Соревнования"
-               mobile = container "Мобильное приложение" "Мобильные приложения" "Android, IOS" "Мобил"
+              mobile = container "Мобильное приложение" "Мобильные приложения" "Android, IOS" "Мобил"
             
              #Relationships
                 client ->  groupsInterest   "Пользователь выбирает группу по интересам"
@@ -147,7 +147,7 @@ workspace "Транснациональная компания по произв
         }
          container socialNetwork  systemContextSocialNetwork {
             include *
-            autolayout
+            #autolayout
         }
         theme default
         
@@ -184,6 +184,7 @@ workspace "Транснациональная компания по произв
        }
        relationship Relationship {
                 dashed false
+                routing Direct
             }
       }
      }
