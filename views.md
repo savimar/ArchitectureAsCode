@@ -10,5 +10,5 @@
 **Информационное представление**
 
 
-<img src="https://github.com/savimar/ArchitectureAsCode/blob/main/screen/inform.png" width="1000" />
+<img src="https://github.com/savimar/ArchitectureAsCode/blob/main/screen/inform.jpg" width="1000" />
 
