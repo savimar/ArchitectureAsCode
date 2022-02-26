@@ -22,3 +22,6 @@
 
 <img src="https://github.com/savimar/ArchitectureAsCode/blob/main/screen/infras.jpg" width="1000" />
 
+**Безопасность**
+
+Будет использоваться система информационной безопасности для защиты веб-приложений от компании Positive Technologies, для внутренней сети - от компании ИнфоТеКС 
